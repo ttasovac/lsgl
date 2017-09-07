@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"
+    xmlns:vuk="http://transpoetika.org/ns/vuk" xml:lang="en" n="lr_diachrony">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>TEI for Vuk (experimental)</title>
+                <author>Toma Tasovac</author>
+            </titleStmt>
+            <publicationStmt>
+                <distributor>Belgrade Center for Digital Humanities</distributor>
+                <availability status="free">
+                    <p>This template file is freely available and you are hereby authorised to copy,
+                        modify, and redistribute it in any way without further reference or
+                        permissions.</p>
+                    <p>When making such modifications, you are strongly recommended to change the
+                        present text to include an accurate statement of the licencing conditions
+                        applicable to your modified text.</p>
+                </availability>
+            </publicationStmt>
+            <notesStmt>
+                <note type="ns">http://transpoetika.org/ns/vuk</note>
+            </notesStmt>
+            <sourceDesc>
+                <p>No source; originally written in digiital form.</p>
+            </sourceDesc>
+        </fileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <p>TEI for describing a hybrid edition of Vuk</p>
+            <schemaSpec ident="tei_vuk" start="TEI">
+                <moduleRef xmlns="http://www.tei-c.org/ns/1.0" key="header"/>
+                <moduleRef xmlns="http://www.tei-c.org/ns/1.0" key="core"/>
+                <moduleRef xmlns="http://www.tei-c.org/ns/1.0" key="tei"/>
+                <moduleRef xmlns="http://www.tei-c.org/ns/1.0" key="textstructure"/>
+                <moduleRef key="figures" except="formula notatedMusic"/>
+                <moduleRef xmlns="http://www.tei-c.org/ns/1.0" key="dictionaries" except=""/>
+                <elementSpec ident="teiCorpus" mode="delete" module="core"/>
+                <!-- required to avoid Sanity Checker complaint -->
+                <elementSpec ident="handNote" mode="delete" module="header"/>
+                <moduleRef key="analysis" except=""/>
+                <!--this is a temporary solution, don't need a global attribute, only for ref, will change later-->
+                <classSpec ident="att.global.analytic" type="atts" mode="change" module="analysis">
+                    <attList>
+                        <attDef ident="certainty" mode="add" ns="http://transpoetika.org/ns/vuk">
+                            <desc>Identifies the certainty of the cross-referenced word - in the
+                                original indicated by a question mark</desc>
+                            <valList type="closed">
+                                <valItem ident="no"/>
+                            </valList>
+                        </attDef>
+                    </attList>
+                </classSpec>
+                <classSpec ident="att.global.analytic" type="atts" mode="change" module="analysis">
+                    <attList>
+                        <attDef ident="edition" mode="add" ns="http://transpoetika.org/ns/vuk">
+                            <desc>Identifies the edition in which the element or its content has
+                                been added. "cdhn" refers to the digital edition. </desc>
+                            <valList type="closed">
+                                <valItem ident="first"/>
+                                <valItem ident="second"/>
+                                <valItem ident="third"/>
+                                <valItem ident="fourth"/>
+                                <valItem ident="cdhn"/>
+                            </valList>
+                        </attDef>
+                    </attList>
+                </classSpec>
+                <classSpec ident="att.global.analytic" type="atts" mode="change" module="analysis">
+                    <attList>
+                        <attDef ident="edition-scope" mode="add" ns="http://transpoetika.org/ns/vuk">
+                            <desc>Identifies the scope of the editorial change that the attribute
+                                vuk:edition referrs to.</desc>
+                            <desc>Identifies the scope of the editorial change that the attribute
+                                vuk:edition referrs to.</desc>
+                            <valList type="closed">
+                                <valItem ident="sense"/>
+                                <valItem ident="hom"/>
+                                <valItem ident="vide"/>
+                                <valItem ident="hom_and_sense"/>
+                                <valItem ident="vide_and_sense"/>
+                                <valItem ident="vide_and_hom"/>
+                                <valItem ident="vide_and_hom_and_sense"/>
+                            </valList>
+                        </attDef>
+                    </attList>
+                </classSpec>
+                <elementSpec ident="quote" module="core" mode="change">
+                    <attList>
+                        <attDef ident="xml:lang" mode="change" usage="req">
+                            <valList type="closed" mode="replace">
+                                <valItem ident="de"/>
+                                <valItem ident="la"/>
+                                <valItem ident="sr"/>
+                                <valItem ident="el"/>
+                                <valItem ident="it"/>
+                                <valItem ident="fr"/>
+                            </valList>
+                        </attDef>
+                        <attDef ident="ana" mode="delete"/>
+                        <attDef ident="change" mode="delete"/>
+                        <attDef ident="copyOf" mode="delete"/>
+                        <attDef ident="corresp" mode="delete"/>
+                        <attDef ident="defective" mode="delete"/>
+                        <attDef ident="exclude" mode="delete"/>
+                        <attDef ident="facs" mode="delete"/>
+                        <attDef ident="n" mode="delete"/>
+                        <attDef ident="next" mode="delete"/>
+                        <attDef ident="prev" mode="delete"/>
+                        <attDef ident="rend" mode="delete"/>
+                        <attDef ident="rendition" mode="delete"/>
+                        <attDef ident="sameAs" mode="delete"/>
+                        <attDef ident="select" mode="delete"/>
+                        <attDef ident="source" mode="delete"/>
+                        <attDef ident="style" mode="delete"/>
+                        <attDef ident="subtype" mode="delete"/>
+                        <attDef ident="synch" mode="delete"/>
+                        <attDef ident="type" mode="delete"/>
+                        <attDef ident="xml:base" mode="delete"/>
+                        <attDef ident="xml:id" mode="delete"/>
+                        <attDef ident="xml:space" mode="delete"/>
+                    </attList>
+                </elementSpec>
+                <elementSpec ident="xr" module="dictionaries" mode="change">
+                    <classes mode="replace">
+                        <memberOf key="model.entryPart"/>
+                        <memberOf key="model.entryPart.top"/>
+                        <memberOf key="att.global"/>
+                        <memberOf key="att.lexicographic"/>
+                        <memberOf key="att.source" mode="add"/>
+                    </classes>
+                </elementSpec>
+                <elementSpec ident="cit" module="core" mode="change">
+                    <classes mode="replace">
+                        <memberOf key="model.qLike"/>
+                        <memberOf key="model.egLike"/>
+                        <memberOf key="model.biblLike"/>
+                        <memberOf key="model.ptrLike"/>
+                        <memberOf key="model.global"/>
+                        <memberOf key="model.entryPart"/>
+                        <memberOf key="att.global"/>
+                        <memberOf key="att.typed"/>
+                        <memberOf key="att.source" mode="add"/>
+                    </classes>
+
+                </elementSpec>
+                <elementSpec ident="lbl" module="dictionaries" mode="change">
+                    <classes mode="replace">
+                        <memberOf key="model.entryPart"/>
+                        <memberOf key="model.gramPart"/>
+                        <memberOf key="att.global"/>
+                        <memberOf key="att.lexicographic"/>
+                        <memberOf key="att.source" mode="add"/>
+                    </classes>
+                </elementSpec>
+                <elementSpec ident="etym" module="dictionaries" mode="change">
+                    <classes mode="replace">
+                        <memberOf key="model.entryPart"/>
+                        <memberOf key="model.entryPart.top"/>
+                        <memberOf key="att.global"/>
+                        <memberOf key="att.lexicographic"/>
+                        <memberOf key="att.source" mode="add"/>
+                    </classes>
+                </elementSpec>
+                <elementSpec ident="form" module="dictionaries" mode="change">
+                    <classes mode="replace">
+                        <memberOf key="model.entryPart"/>
+                        <memberOf key="model.entryPart.top"/>
+                        <memberOf key="model.formPart"/>
+                        <memberOf key="att.global"/>
+                        <memberOf key="att.lexicographic"/>
+                        <memberOf key="att.source" mode="add"/>
+                    </classes>
+                </elementSpec>
+                <elementSpec ident="orth" module="dictionaries" mode="change">
+                    <classes mode="replace">
+                        <memberOf key="model.entryPart"/>
+                        <memberOf key="model.formPart"/>
+                        <memberOf key="att.global"/>
+                        <memberOf key="att.lexicographic"/>
+                        <memberOf key="att.source" mode="add"/>
+                    </classes>
+                </elementSpec>
+                <elementSpec ident="re" module="dictionaries" mode="change">
+                    <classes mode="change">
+                        <memberOf key="att.source" mode="add"/>
+                    </classes>
+                </elementSpec>
+                <moduleRef key="tagdocs" except="altIdent alternate att attDef           attList
+                    attRef                     classRef classSpec           classes code constraint
+                    constraintSpec content datatype           defaultVal eg egXML elementRef
+                    elementSpec equiv exemplum           ident listRef macroRef
+                    macroSpec           memberOf moduleRef moduleSpec remarks schemaSpec sequence
+                    specDesc                     specGrp specGrpRef specList tag           textNode
+                    val valDesc valItem valList"/>
+                <elementSpec ident="entryFree" module="dictionaries" mode="change">
+                    <classes mode="replace">
+                        <memberOf key="model.entryLike"/>
+                    <!--    <memberOf key="att.entryLike"/>-->
+                        <memberOf key="att.global"/>
+                        <memberOf key="att.lexicographic"/>
+                        <memberOf key="att.sortable"/>
+                        <memberOf key="att.source"/>
+                        <memberOf key="att.typed"/>
+                    </classes>
+                </elementSpec>
+                <elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="extras" mode="add" ns="http://raskovnik.org/ns/1.0">
+                    <classes>
+                        <memberOf key="model.entryPart"/>
+                    </classes>
+                    <content>
+                        <rng:oneOrMore>
+                            <rng:element name="prev" ns="http://raskovnik.org/ns/1.0">
+                                <rng:attribute name="id">
+                                <rng:text/>
+                                </rng:attribute>
+                                <rng:text/>
+                            </rng:element>
+                            <rng:element name="next" ns="http://raskovnik.org/ns/1.0">
+                                <rng:attribute name="id">
+                                    <rng:text/>
+                                </rng:attribute>
+                                <rng:text/>
+                            </rng:element>
+                        </rng:oneOrMore>
+                    </content>
+                </elementSpec>
+                <moduleRef key="linking" except=""/>
+                <elementSpec ident="sense" module="dictionaries" mode="change">
+                    <classes mode="replace">
+                        <memberOf key="model.entryPart"/>
+                        <memberOf key="att.global"/>
+                        <memberOf key="att.lexicographic"/>
+                        <memberOf key="att.source" mode="add"/>
+                    </classes>
+                    <content>
+                        <alternate minOccurs="0"
+                            maxOccurs="unbounded">
+                            <textNode/>
+                            <classRef key="model.gLike"/>
+                            <elementRef key="sense"/>
+                            <elementRef key="lbl"/>
+                            <classRef key="model.entryPart.top"/>
+                            <classRef key="model.phrase"/>
+                            <classRef key="model.global"/>
+                        </alternate>
+                    </content>
+                </elementSpec>
+                <elementSpec ident="gramGrp" module="dictionaries" mode="change">
+                    <classes mode="replace">
+                        <memberOf key="model.entryPart"/>
+                        <memberOf key="model.entryPart.top"/>
+                        <memberOf key="model.gramPart"/>
+                        <memberOf key="att.global"/>
+                        <memberOf key="att.lexicographic"/>
+                        <memberOf key="att.source" mode="add"/>
+                        <memberOf key="att.typed"/>
+                    </classes>
+                </elementSpec>
+                <elementSpec ident="ref" module="core" mode="change">
+                    <classes mode="replace">
+                        <memberOf key="model.ptrLike"/>
+                        <memberOf key="att.cReferencing"/>
+                        <memberOf key="att.declaring"/>
+                        <memberOf key="att.global"/>
+                        <memberOf key="att.internetMedia"/>
+                        <memberOf key="att.pointing"/>
+                        <memberOf key="att.source" mode="add"/>
+                        <memberOf key="att.typed"/>
+                    </classes>
+                </elementSpec>
+                <elementSpec ident="usg" module="dictionaries" mode="change">
+                    <classes mode="replace">
+                        <memberOf key="model.entryPart"/>
+                        <memberOf key="model.entryPart.top"/>
+                        <memberOf key="model.gramPart"/>
+                        <memberOf key="att.global"/>
+                        <memberOf key="att.lexicographic"/>
+                        <memberOf key="att.source" mode="add"/>
+                    </classes>
+                </elementSpec>
+                <elementSpec ident="dictScrap" module="dictionaries" mode="change">
+                    <classes mode="change">
+                        <memberOf key="att.source" mode="add"/>
+                        <memberOf key="att.typed" mode="add"/>
+                    </classes>
+                </elementSpec>
+                <elementSpec ident="def" module="dictionaries" mode="change">
+                    <classes mode="change">
+                        <memberOf key="att.source" mode="add"/>
+                    </classes>
+                    <content>
+                        <alternate minOccurs="0" maxOccurs="unbounded">
+
+                            <elementRef key="usg"/>
+                            <macroRef key="macro.paraContent"/>
+                        </alternate>
+                    </content>
+
+                </elementSpec>
+                <classSpec ident="att.global" type="atts" mode="change" module="tei">
+                    <attList>
+                        <attDef ident="xml:lang" mode="change">
+                            <valList type="closed" mode="replace">
+                                <valItem ident="de"/>
+                                <valItem ident="la"/>
+                                <valItem ident="sr"/>
+                                <valItem ident="el"/>
+                                <valItem ident="it"/>
+                                <valItem ident="fr"/>
+                                <valItem ident="ocu"/>
+                                <valItem ident="tr"/>
+                            </valList>
+                        </attDef>
+                    </attList>
+                </classSpec>
+            </schemaSpec>
+        </body>
+    </text>
+</TEI>
